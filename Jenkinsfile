@@ -53,14 +53,14 @@ pipeline {
             echo 'Pipeline completed successfully!'
             emailext subject: 'Jenkins Pipeline Success', 
                      body: 'The pipeline has completed successfully.', 
-                     to: 'moksh4794.be23@chitkara.edu.in'
+                     to: 'mokshbansal07@gmail.com'
         }
         
         failure {
             echo 'Pipeline failed!'
             emailext subject: 'Jenkins Pipeline Failure', 
                      body: 'The pipeline has failed. Please check the logs.', 
-                     to: 'moksh4794.be23@chitkara.edu.in'
+                     to: 'mokshbansal07@gmail.com'
         }
     }
 }
