@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo "Installing dependencies using npm"
                 echo 'npm install'
+                echo 'Hello'
                 echo "Building the application using npm"
                 echo 'npm run build'
             }
