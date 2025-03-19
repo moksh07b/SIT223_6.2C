@@ -1,49 +1,57 @@
 pipeline {
     agent any
     
-    environment {
-        DIRECTORY_PATH = 'https://github.com/moksh07b/SIT223_Task_5.1P'
-        TESTING_ENVIRONMENT = 'Staging'
-        PRODUCTION_ENVIRONMENT = 'Moksh'
-    }
-    
-    stages {    // Multiple Stages
-        stage('Build') {    //Single Stage
-            steps {         //Add Steps to the stage    
-                echo "Fetch the source code from the directory path: ${DIRECTORY_PATH}"
-                echo "Compile the code and generateany necessary artifacts"
-            }
-        }
-        
-        stage('Test') {
+    stages {
+        stage('Build') {
             steps {
-                echo "Unit tests"
-                echo "Integration tests"
+                echo "Installing dependencies using npm"
+                echo 'npm install'
+                echo "Building the application using npm"
+                echo 'npm run build'
             }
         }
-        
-        stage('Code Quality Check') {
+
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Check the quality of the code"
+                echo "Running unit tests using npm"
+                echo 'npm run test:unit'
+                echo "Running integration tests using npm"
+                echo 'npm run test:integration'
             }
         }
-        
-        stage('Deploy') {
+
+        stage('Code Analysis') {
             steps {
-                echo "Deploying to ${TESTING_ENVIRONMENT} environment"
+                echo "Performing code analysis using eslint"
+                echo 'npm run lint'
             }
         }
-        
-        stage('Approval') {
+
+        stage('Security Scan') {
             steps {
-                echo "Waiting for manual approval to proceed to production deployment"
-                sleep 10
+                echo "Performing security scan using npm audit"
+                echo 'npm audit'
             }
         }
-        
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying to Staging Server using npm"
+                echo 'npm run deploy:staging'
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests on staging environment"
+                echo 'npm run test:staging'
+            }
+        }
+
         stage('Deploy to Production') {
             steps {
-                echo "Deploying to production environment: ${PRODUCTION_ENVIRONMENT}"
+                echo "Deploying to Production Server using npm"
+                echo 'npm run deploy:production'
             }
         }
     }
@@ -53,7 +61,6 @@ pipeline {
             emailext subject: 'Jenkins Pipeline Success', 
              body: 'The pipeline has completed successfully.', 
              to: 'mokshbansal07@gmail.com'
-
         }
         
         failure {
