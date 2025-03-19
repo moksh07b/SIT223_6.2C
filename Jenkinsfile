@@ -46,7 +46,21 @@ pipeline {
                 echo "Deploying to production environment: ${PRODUCTION_ENVIRONMENT}"
             }
         }
-    
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+            emailext subject: 'Jenkins Pipeline Success', 
+                     body: 'The pipeline has completed successfully.', 
+                     to: 'mokshbansal07@gmail.com'
+        }
         
+        failure {
+            echo 'Pipeline failed!'
+            emailext subject: 'Jenkins Pipeline Failure', 
+                     body: 'The pipeline has failed. Please check the logs.', 
+                     to: 'mokshbansal07@gmail.com'
+        }
     }
 }
