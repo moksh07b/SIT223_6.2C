@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {    //Single Stage
             steps {         //Add Steps to the stage    
                 echo "Fetch the source code from the directory path: ${DIRECTORY_PATH}"
-                echo "Compile the code and generate any necessary artifacts"
+                echo "Compile the code and generateany necessary artifacts"
             }
         }
         
