@@ -50,10 +50,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline completed successfully!'
             emailext subject: 'Jenkins Pipeline Success', 
-                     body: 'The pipeline has completed successfully.', 
-                     to: 'mokshbansal07@gmail.com'
+             body: 'The pipeline has completed successfully.', 
+             to: 'mokshbansal07@gmail.com'
+
         }
         
         failure {
